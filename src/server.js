@@ -10,6 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => res.redirect('/cars'));
 app.use('/cars', require('./routes/cars'));
 app.use('/categories', require('./routes/categories'));
+app.use('/extras', require('./routes/extras'));
 // tratarea erorilor neprevazute
 app.use((err, req, res, next) => {
     console.error(err);

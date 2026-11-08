@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1><%= title %></h1>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<form method="post" action="<%= action %>">
+    <p><label>Nume: <input name="nume" maxlength="80" value="<%= extra.nume || '' %>" required></label></p>
+    <p><label>Pret pe zi (lei): <input type="number" name="pret_pe_zi" min="0.01" step="0.01" value="<%= extra.pret_pe_zi || '' %>" required></label></p>
+    <p>
+        <button type="submit">Salveaza</button>
+        <a href="/extras">Anuleaza</a>
+    </p>
+</form>
+</body>
+</html>
