@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Plati - Inchirieri auto</title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1>Plati</h1>
+<p><a href="/payments/new">+ Adauga plata</a></p>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<table border="1" cellpadding="6">
+    <tr>
+        <th>ID</th><th>Rezervare</th><th>Client</th><th>Masina</th>
+        <th>Suma</th><th>Metoda</th><th>Data</th><th>Actiuni</th>
+    </tr>
+    <% payments.forEach(function (p) { %>
+        <tr>
+            <td><%= p.id %></td>
+            <td>#<%= p.rental_id %></td>
+            <td><%= p.client %></td>
+            <td><%= p.masina %></td>
+            <td><%= p.suma %> lei</td>
+            <td><%= p.metoda %></td>
+            <td><%= p.data_plata %></td>
+            <td>
+                <a href="/payments/<%= p.id %>/edit">Editeaza</a>
+                <form method="post" action="/payments/<%= p.id %>/delete" style="display:inline;"
+                      onsubmit="return confirm('Stergi plata <%= p.id %>?');">
+                    <button type="submit">Sterge</button>
+                </form>
+            </td>
+        </tr>
+    <% }); %>
+</table>
+</body>
+</html>

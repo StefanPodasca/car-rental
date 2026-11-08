@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1><%= title %></h1>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<form method="post" action="<%= action %>">
+    <p>
+        <label>Rezervare:
+            <select name="rental_id" required>
+                <% rentals.forEach(function (r) { %>
+                    <option value="<%= r.id %>" <%= String(payment.rental_id) === String(r.id) ? 'selected' : '' %>>
+                        #<%= r.id %> - <%= r.client %> - <%= r.masina %> (total <%= r.pret_total %> lei, platit <%= r.platit %> lei)
+                    </option>
+                <% }); %>
+            </select>
+        </label>
+    </p>
+    <p><label>Suma (lei): <input type="number" name="suma" min="0.01" step="0.01" value="<%= payment.suma || '' %>" required></label></p>
+    <p>
+        <label>Metoda:
+            <select name="metoda" required>
+                <% metode.forEach(function (m) { %>
+                    <option value="<%= m %>" <%= payment.metoda === m ? 'selected' : '' %>><%= m %></option>
+                <% }); %>
+            </select>
+        </label>
+    </p>
+    <p>
+        <button type="submit">Salveaza</button>
+        <a href="/payments">Anuleaza</a>
+    </p>
+</form>
+</body>
+</html>
