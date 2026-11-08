@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Masini - Inchirieri auto</title>
+</head>
+<body>
+<h1>Masini</h1>
+<table border="1" cellpadding="6">
+    <tr>
+        <th>ID</th><th>Marca</th><th>Model</th><th>An</th>
+        <th>Nr. inmatriculare</th><th>Categorie</th><th>Pret/zi</th><th>Stare</th>
+    </tr>
+    <% cars.forEach(function (car) { %>
+        <tr>
+            <td><%= car.id %></td>
+            <td><%= car.marca %></td>
+            <td><%= car.model %></td>
+            <td><%= car.an %></td>
+            <td><%= car.numar_inmatriculare %></td>
+            <td><%= car.categorie %></td>
+            <td><%= car.pret_pe_zi %> lei</td>
+            <td><%= car.stare %></td>
+        </tr>
+    <% }); %>
+</table>
+</body>
+</html>
