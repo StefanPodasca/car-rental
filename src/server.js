@@ -12,6 +12,7 @@ app.use('/cars', require('./routes/cars'));
 app.use('/categories', require('./routes/categories'));
 app.use('/extras', require('./routes/extras'));
 app.use('/users', require('./routes/users'));
+app.use('/rentals', require('./routes/rentals'));
 // tratarea erorilor neprevazute
 app.use((err, req, res, next) => {
     console.error(err);

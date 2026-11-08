@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1><%= title %></h1>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<form method="post" action="<%= action %>">
+    <p>
+        <label>Client:
+            <select name="user_id" required>
+                <% users.forEach(function (u) { %>
+                    <option value="<%= u.id %>" <%= String(rental.user_id) === String(u.id) ? 'selected' : '' %>><%= u.nume %> (<%= u.email %>)</option>
+                <% }); %>
+            </select>
+        </label>
+    </p>
+    <p>
+        <label>Masina:
+            <select name="car_id" required>
+                <% cars.forEach(function (c) { %>
+                    <option value="<%= c.id %>" <%= String(rental.car_id) === String(c.id) ? 'selected' : '' %>><%= c.marca %> <%= c.model %> - <%= c.numar_inmatriculare %> (<%= c.pret_pe_zi %> lei/zi)</option>
+                <% }); %>
+            </select>
+        </label>
+    </p>
+    <p><label>De la: <input type="date" name="data_start" value="<%= rental.data_start || '' %>" required></label></p>
+    <p><label>Pana la: <input type="date" name="data_end" value="<%= rental.data_end || '' %>" required></label></p>
+    <p>
+        <label>Stare:
+            <select name="stare" required>
+                <% stari.forEach(function (s) { %>
+                    <option value="<%= s %>" <%= rental.stare === s ? 'selected' : '' %>><%= s %></option>
+                <% }); %>
+            </select>
+        </label>
+    </p>
+
+    <p><strong>Optiuni suplimentare:</strong></p>
+    <% extras.forEach(function (e) { %>
+        <p>
+            <label>
+                <input type="checkbox" name="extras" value="<%= e.id %>" <%= selected[e.id] ? 'checked' : '' %>>
+                <%= e.nume %> (<%= e.pret_pe_zi %> lei/zi)
+            </label>
+            Cantitate: <input type="number" name="qty_<%= e.id %>" min="1" value="<%= selected[e.id] || 1 %>" style="width: 60px;">
+        </p>
+    <% }); %>
+
+    <p><small>Pretul total se calculeaza automat: zile x (pret masina + optiuni).</small></p>
+    <p>
+        <button type="submit">Salveaza</button>
+        <a href="/rentals">Anuleaza</a>
+    </p>
+</form>
+</body>
+</html>

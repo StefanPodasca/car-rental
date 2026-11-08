@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezervari - Inchirieri auto</title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1>Rezervari</h1>
+<p><a href="/rentals/new">+ Adauga rezervare</a></p>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<table border="1" cellpadding="6">
+    <tr>
+        <th>ID</th><th>Client</th><th>Masina</th><th>De la</th><th>Pana la</th>
+        <th>Stare</th><th>Optiuni</th><th>Pret total</th><th>Platit</th><th>Actiuni</th>
+    </tr>
+    <% rentals.forEach(function (r) { %>
+        <tr>
+            <td><%= r.id %></td>
+            <td><%= r.client %></td>
+            <td><%= r.masina %></td>
+            <td><%= r.data_start %></td>
+            <td><%= r.data_end %></td>
+            <td><%= r.stare %></td>
+            <td><%= r.optiuni %></td>
+            <td><%= r.pret_total %> lei</td>
+            <td><%= r.platit %> lei</td>
+            <td>
+                <a href="/rentals/<%= r.id %>/edit">Editeaza</a>
+                <form method="post" action="/rentals/<%= r.id %>/delete" style="display:inline;"
+                      onsubmit="return confirm('Stergi rezervarea <%= r.id %>? Se sterg si platile ei.');">
+                    <button type="submit">Sterge</button>
+                </form>
+            </td>
+        </tr>
+    <% }); %>
+</table>
+</body>
+</html>
