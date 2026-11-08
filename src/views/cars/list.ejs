@@ -6,10 +6,16 @@
 </head>
 <body>
 <h1>Masini</h1>
+<p><a href="/cars/new">+ Adauga masina</a></p>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
 <table border="1" cellpadding="6">
     <tr>
         <th>ID</th><th>Marca</th><th>Model</th><th>An</th>
-        <th>Nr. inmatriculare</th><th>Categorie</th><th>Pret/zi</th><th>Stare</th>
+        <th>Nr. inmatriculare</th><th>Categorie</th><th>Pret/zi</th><th>Stare</th><th>Actiuni</th>
     </tr>
     <% cars.forEach(function (car) { %>
         <tr>
@@ -21,6 +27,13 @@
             <td><%= car.categorie %></td>
             <td><%= car.pret_pe_zi %> lei</td>
             <td><%= car.stare %></td>
+            <td>
+                <a href="/cars/<%= car.id %>/edit">Editeaza</a>
+                <form method="post" action="/cars/<%= car.id %>/delete" style="display:inline;"
+                      onsubmit="return confirm('Stergi masina <%= car.marca %> <%= car.model %>?');">
+                    <button type="submit">Sterge</button>
+                </form>
+            </td>
         </tr>
     <% }); %>
 </table>

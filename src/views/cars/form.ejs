@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+</head>
+<body>
+<h1><%= title %></h1>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<form method="post" action="<%= action %>">
+    <p><label>Marca: <input name="marca" value="<%= car.marca || '' %>" required></label></p>
+    <p><label>Model: <input name="model" value="<%= car.model || '' %>" required></label></p>
+    <p><label>An: <input type="number" name="an" min="2000" max="2100" value="<%= car.an || '' %>" required></label></p>
+    <p><label>Nr. inmatriculare: <input name="numar_inmatriculare" value="<%= car.numar_inmatriculare || '' %>" required></label></p>
+    <p><label>Pret pe zi (lei): <input type="number" name="pret_pe_zi" min="0.01" step="0.01" value="<%= car.pret_pe_zi || '' %>" required></label></p>
+    <p>
+        <label>Categorie:
+            <select name="category_id" required>
+                <% categories.forEach(function (cat) { %>
+                    <option value="<%= cat.id %>" <%= String(car.category_id) === String(cat.id) ? 'selected' : '' %>><%= cat.nume %></option>
+                <% }); %>
+            </select>
+        </label>
+    </p>
+    <p>
+        <label>Stare:
+            <select name="stare" required>
+                <% stari.forEach(function (s) { %>
+                    <option value="<%= s %>" <%= car.stare === s ? 'selected' : '' %>><%= s %></option>
+                <% }); %>
+            </select>
+        </label>
+    </p>
+    <p>
+        <button type="submit">Salveaza</button>
+        <a href="/cars">Anuleaza</a>
+    </p>
+</form>
+</body>
+</html>
