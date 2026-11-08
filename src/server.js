@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => res.redirect('/cars'));
 app.use('/cars', require('./routes/cars'));
-
+app.use('/categories', require('./routes/categories'));
 // tratarea erorilor neprevazute
 app.use((err, req, res, next) => {
     console.error(err);

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Categorii - Inchirieri auto</title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1>Categorii</h1>
+<p><a href="/categories/new">+ Adauga categorie</a></p>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<table border="1" cellpadding="6">
+    <tr>
+        <th>ID</th><th>Nume</th><th>Descriere</th><th>Nr. masini</th><th>Actiuni</th>
+    </tr>
+    <% categories.forEach(function (cat) { %>
+        <tr>
+            <td><%= cat.id %></td>
+            <td><%= cat.nume %></td>
+            <td><%= cat.descriere %></td>
+            <td><%= cat.nr_masini %></td>
+            <td>
+                <a href="/categories/<%= cat.id %>/edit">Editeaza</a>
+                <form method="post" action="/categories/<%= cat.id %>/delete" style="display:inline;"
+                      onsubmit="return confirm('Stergi categoria <%= cat.nume %>?');">
+                    <button type="submit">Sterge</button>
+                </form>
+            </td>
+        </tr>
+    <% }); %>
+</table>
+</body>
+</html>
