@@ -14,6 +14,7 @@ app.use('/extras', require('./routes/extras'));
 app.use('/users', require('./routes/users'));
 app.use('/rentals', require('./routes/rentals'));
 app.use('/payments', require('./routes/payments'));
+app.use('/roles', require('./routes/roles'));
 // tratarea erorilor neprevazute
 app.use((err, req, res, next) => {
     console.error(err);

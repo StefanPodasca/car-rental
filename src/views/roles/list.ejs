@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Roluri - Inchirieri auto</title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1>Roluri</h1>
+<p><a href="/roles/new">+ Adauga rol</a></p>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<table border="1" cellpadding="6">
+    <tr>
+        <th>ID</th><th>Nume</th><th>Nr. utilizatori</th><th>Actiuni</th>
+    </tr>
+    <% roles.forEach(function (role) { %>
+        <tr>
+            <td><%= role.id %></td>
+            <td><%= role.nume %></td>
+            <td><%= role.nr_utilizatori %></td>
+            <td>
+                <% if (baseRoles.includes(role.nume)) { %>
+                    <em>rol de baza</em>
+                <% } else { %>
+                    <a href="/roles/<%= role.id %>/edit">Editeaza</a>
+                    <form method="post" action="/roles/<%= role.id %>/delete" style="display:inline;"
+                          onsubmit="return confirm('Stergi rolul <%= role.nume %>?');">
+                        <button type="submit">Sterge</button>
+                    </form>
+                <% } %>
+            </td>
+        </tr>
+    <% }); %>
+</table>
+</body>
+</html>

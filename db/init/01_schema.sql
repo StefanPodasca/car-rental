@@ -3,8 +3,8 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 CREATE TABLE roles (
                        id SERIAL PRIMARY KEY,
-                       nume VARCHAR(20) NOT NULL UNIQUE
-                           CHECK (nume IN ('client', 'angajat', 'admin'))
+                       nume VARCHAR(20) NOT NULL UNIQUE,
+                       CONSTRAINT roles_nume_not_empty CHECK (length(trim(nume)) > 0)
 );
 
 CREATE TABLE users (
