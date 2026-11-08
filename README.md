@@ -11,6 +11,8 @@ Descrierea domeniului si a paginilor: [docs/domeniu.md](docs/domeniu.md)
 
 ## Pornire
 
+Baza de date este expusa pe portul 5433, pentru a nu intra in conflict cu un PostgreSQL local.
+
 1. Cloneaza repository-ul si intra in folder:
    ```
    git clone https://github.com/StefanPodasca/car-rental.git
@@ -59,7 +61,7 @@ Schema completa, cu relatii si constrangeri: [db/init/01_schema.sql](db/init/01_
 |---|---|---|
 | 0 | Tema, document domeniu | Gata |
 | 1 | Modelare, fixtures | Gata |
-| 2 | CRUD, descrierea paginilor | In lucru |
+| 2 | CRUD, descrierea paginilor | Gata |
 | 3 | Autentificare, roluri | De facut |
 | 4 | Indecsi, load test | De facut |
 | 5 | Rapoarte | De facut |
