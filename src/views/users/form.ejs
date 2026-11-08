@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1><%= title %></h1>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<form method="post" action="<%= action %>">
+    <p><label>Nume: <input name="nume" maxlength="100" value="<%= user.nume || '' %>" required></label></p>
+    <p><label>Email: <input type="email" name="email" maxlength="150" value="<%= user.email || '' %>" required></label></p>
+    <p><label>Telefon: <input name="telefon" maxlength="20" value="<%= user.telefon || '' %>"></label></p>
+    <p>
+        <label>Parola:
+            <input type="password" name="parola" minlength="8" <%= isNew ? 'required' : '' %>>
+        </label>
+        <% if (!isNew) { %><small>(lasa gol pentru a pastra parola actuala)</small><% } %>
+    </p>
+    <p>
+        <label>Rol:
+            <select name="role_id" required>
+                <% roles.forEach(function (role) { %>
+                    <option value="<%= role.id %>" <%= String(user.role_id) === String(role.id) ? 'selected' : '' %>><%= role.nume %></option>
+                <% }); %>
+            </select>
+        </label>
+    </p>
+    <p>
+        <button type="submit">Salveaza</button>
+        <a href="/users">Anuleaza</a>
+    </p>
+</form>
+</body>
+</html>

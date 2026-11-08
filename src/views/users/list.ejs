@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Utilizatori - Inchirieri auto</title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1>Utilizatori</h1>
+<p><a href="/users/new">+ Adauga utilizator</a></p>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<table border="1" cellpadding="6">
+    <tr>
+        <th>ID</th><th>Nume</th><th>Email</th><th>Telefon</th><th>Rol</th><th>Creat la</th><th>Actiuni</th>
+    </tr>
+    <% users.forEach(function (user) { %>
+        <tr>
+            <td><%= user.id %></td>
+            <td><%= user.nume %></td>
+            <td><%= user.email %></td>
+            <td><%= user.telefon %></td>
+            <td><%= user.rol %></td>
+            <td><%= user.data_creare %></td>
+            <td>
+                <a href="/users/<%= user.id %>/edit">Editeaza</a>
+                <form method="post" action="/users/<%= user.id %>/delete" style="display:inline;"
+                      onsubmit="return confirm('Stergi utilizatorul <%= user.nume %>?');">
+                    <button type="submit">Sterge</button>
+                </form>
+            </td>
+        </tr>
+    <% }); %>
+</table>
+</body>
+</html>

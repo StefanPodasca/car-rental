@@ -11,6 +11,7 @@ app.get('/', (req, res) => res.redirect('/cars'));
 app.use('/cars', require('./routes/cars'));
 app.use('/categories', require('./routes/categories'));
 app.use('/extras', require('./routes/extras'));
+app.use('/users', require('./routes/users'));
 // tratarea erorilor neprevazute
 app.use((err, req, res, next) => {
     console.error(err);
