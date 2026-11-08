@@ -98,8 +98,8 @@ Lista paginilor și descrierea fiecăreia (scop, date afișate, acțiuni, roluri
 | # | Cerință | Etapa | Stare |
 |---|---|---|---|
 | 1 | Documentație (domeniu + pagini) | 0, 2 | Domeniul descris, paginile se detaliază în Etapa 2 |
-| 2 | Model de date (minimum 6 tabele, relații, constrângeri) | 1 | Planificat (8 tabele) |
-| 3 | Fixtures (date de test la pornirea serviciului) | 1 | De realizat |
+| 2 | Model de date (minimum 6 tabele, relații, constrângeri) | 1 | Gata (8 tabele) |
+| 3 | Fixtures (date de test la pornirea serviciului) | 1 | Gata |
 | 4 | Operații CRUD pentru toate entitățile | 2 | De realizat |
 | 5 | Autentificare (parole, sesiuni sau tokenuri) | 3 | De realizat |
 | 6 | Roluri (minimum 3, drepturi diferite) | 3 | Definite (client, angajat, admin) |
