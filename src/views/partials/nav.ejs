@@ -1,5 +1,8 @@
 <nav>
     <a href="/catalog">Catalog</a>
+    <% if (currentUser && currentUser.rol === 'client') { %>
+        | <a href="/my-rentals">Rezervarile mele</a>
+    <% } %>
     <% if (currentUser && ['angajat', 'admin'].includes(currentUser.rol)) { %>
         | <a href="/cars">Masini</a>
         | <a href="/rentals">Rezervari</a>

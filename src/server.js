@@ -52,6 +52,7 @@ app.get('/', (req, res) => {
 
 app.use('/', require('./routes/account'));
 app.use('/catalog', require('./routes/catalog'));
+app.use('/my-rentals', requireRole('client'), require('./routes/my-rentals'));
 
 app.use('/cars', staff, require('./routes/cars'));
 app.use('/rentals', staff, require('./routes/rentals'));

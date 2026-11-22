@@ -38,6 +38,7 @@
         <tr>
             <th>Marca</th><th>Model</th><th>An</th><th>Categorie</th><th>Pret/zi</th>
             <% if (zile) { %><th>Pret estimat</th><% } %>
+            <th></th>
         </tr>
         <% cars.forEach(function (car) { %>
             <tr>
@@ -47,6 +48,11 @@
                 <td><%= car.categorie %></td>
                 <td><%= car.pret_pe_zi %> lei</td>
                 <% if (zile) { %><td><%= (car.pret_pe_zi * zile).toFixed(2) %> lei</td><% } %>
+                <td>
+                    <% if (!currentUser || currentUser.rol === 'client') { %>
+                        <a href="/my-rentals/new?car_id=<%= car.id %>&data_start=<%= filters.data_start %>&data_end=<%= filters.data_end %>">Rezerva</a>
+                    <% } %>
+                </td>
             </tr>
         <% }); %>
     </table>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezervarile mele - Inchirieri auto</title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1>Rezervarile mele</h1>
+<p><a href="/catalog">+ Rezerva o masina</a></p>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<% if (rentals.length === 0) { %>
+    <p>Nu ai nicio rezervare. Alege o masina din catalog.</p>
+<% } else { %>
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>Masina</th><th>De la</th><th>Pana la</th><th>Stare</th>
+            <th>Optiuni</th><th>Pret total</th><th>Platit</th><th>Actiuni</th>
+        </tr>
+        <% rentals.forEach(function (r) { %>
+            <tr>
+                <td><%= r.masina %></td>
+                <td><%= r.data_start %></td>
+                <td><%= r.data_end %></td>
+                <td><%= r.stare %></td>
+                <td><%= r.optiuni %></td>
+                <td><%= r.pret_total %> lei</td>
+                <td><%= r.platit %> lei</td>
+                <td>
+                    <% if (r.stare === 'in_asteptare' || r.stare === 'confirmata') { %>
+                        <form method="post" action="/my-rentals/<%= r.id %>/cancel" style="display:inline;"
+                              onsubmit="return confirm('Anulezi rezervarea?');">
+                            <button type="submit">Anuleaza</button>
+                        </form>
+                    <% } %>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+<% } %>
+</body>
+</html>
