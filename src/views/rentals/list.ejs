@@ -31,10 +31,12 @@
             <td><%= r.platit %> lei</td>
             <td>
                 <a href="/rentals/<%= r.id %>/edit">Editeaza</a>
-                <form method="post" action="/rentals/<%= r.id %>/delete" style="display:inline;"
-                      onsubmit="return confirm('Stergi rezervarea <%= r.id %>? Se sterg si platile ei.');">
-                    <button type="submit">Sterge</button>
-                </form>
+                <% if (currentUser.rol === 'admin') { %>
+                    <form method="post" action="/rentals/<%= r.id %>/delete" style="display:inline;"
+                          onsubmit="return confirm('Stergi rezervarea <%= r.id %>? Se sterg si platile ei.');">
+                        <button type="submit">Sterge</button>
+                    </form>
+                <% } %>
             </td>
         </tr>
     <% }); %>

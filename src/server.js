@@ -4,7 +4,7 @@ const session = require('express-session');
 const PgSession = require('connect-pg-simple')(session);
 const path = require('path');
 const pool = require('./db');
-const { loadUser } = require('./middleware/auth');
+const { loadUser, requireRole } = require('./middleware/auth');
 
 if (!process.env.SESSION_SECRET) {
     console.error('Lipseste SESSION_SECRET din fisierul .env');
@@ -32,15 +32,35 @@ app.use(session({
 // pune utilizatorul curent la dispozitia paginilor
 app.use(loadUser);
 
-app.get('/', (req, res) => res.redirect('/cars'));
+// orice stergere (POST .../delete) necesita rolul admin
+app.use((req, res, next) => {
+    if (req.method === 'POST' && req.path.endsWith('/delete')) {
+        return requireRole('admin')(req, res, next);
+    }
+    next();
+});
+
+const staff = requireRole('angajat', 'admin');
+const admin = requireRole('admin');
+
+// pagina de start depinde de rol
+app.get('/', (req, res) => {
+    const user = req.session.user;
+    if (user && (user.rol === 'angajat' || user.rol === 'admin')) return res.redirect('/rentals');
+    res.redirect('/catalog');
+});
+
 app.use('/', require('./routes/account'));
-app.use('/cars', require('./routes/cars'));
-app.use('/categories', require('./routes/categories'));
-app.use('/extras', require('./routes/extras'));
-app.use('/users', require('./routes/users'));
-app.use('/rentals', require('./routes/rentals'));
-app.use('/payments', require('./routes/payments'));
-app.use('/roles', require('./routes/roles'));
+app.use('/catalog', require('./routes/catalog'));
+
+app.use('/cars', staff, require('./routes/cars'));
+app.use('/rentals', staff, require('./routes/rentals'));
+app.use('/payments', staff, require('./routes/payments'));
+
+app.use('/categories', admin, require('./routes/categories'));
+app.use('/extras', admin, require('./routes/extras'));
+app.use('/users', admin, require('./routes/users'));
+app.use('/roles', admin, require('./routes/roles'));
 
 // tratarea erorilor neprevazute
 app.use((err, req, res, next) => {

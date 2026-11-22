@@ -1,11 +1,16 @@
 <nav>
-    <a href="/cars">Masini</a> |
-    <a href="/categories">Categorii</a> |
-    <a href="/extras">Optiuni</a> |
-    <a href="/users">Utilizatori</a> |
-    <a href="/rentals">Rezervari</a> |
-    <a href="/payments">Plati</a> |
-    <a href="/roles">Roluri</a>
+    <a href="/catalog">Catalog</a>
+    <% if (currentUser && ['angajat', 'admin'].includes(currentUser.rol)) { %>
+        | <a href="/cars">Masini</a>
+        | <a href="/rentals">Rezervari</a>
+        | <a href="/payments">Plati</a>
+    <% } %>
+    <% if (currentUser && currentUser.rol === 'admin') { %>
+        | <a href="/categories">Categorii</a>
+        | <a href="/extras">Optiuni</a>
+        | <a href="/users">Utilizatori</a>
+        | <a href="/roles">Roluri</a>
+    <% } %>
     <span style="float: right;">
         <% if (currentUser) { %>
             <%= currentUser.nume %> (<%= currentUser.rol %>)

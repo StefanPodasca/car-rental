@@ -29,10 +29,12 @@
             <td><%= p.data_plata %></td>
             <td>
                 <a href="/payments/<%= p.id %>/edit">Editeaza</a>
-                <form method="post" action="/payments/<%= p.id %>/delete" style="display:inline;"
-                      onsubmit="return confirm('Stergi plata <%= p.id %>?');">
-                    <button type="submit">Sterge</button>
-                </form>
+                <% if (currentUser.rol === 'admin') { %>
+                    <form method="post" action="/payments/<%= p.id %>/delete" style="display:inline;"
+                          onsubmit="return confirm('Stergi plata <%= p.id %>?');">
+                        <button type="submit">Sterge</button>
+                    </form>
+                <% } %>
             </td>
         </tr>
     <% }); %>

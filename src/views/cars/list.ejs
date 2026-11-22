@@ -30,10 +30,12 @@
             <td><%= car.stare %></td>
             <td>
                 <a href="/cars/<%= car.id %>/edit">Editeaza</a>
-                <form method="post" action="/cars/<%= car.id %>/delete" style="display:inline;"
-                      onsubmit="return confirm('Stergi masina <%= car.marca %> <%= car.model %>?');">
-                    <button type="submit">Sterge</button>
-                </form>
+                <% if (currentUser.rol === 'admin') { %>
+                    <form method="post" action="/cars/<%= car.id %>/delete" style="display:inline;"
+                          onsubmit="return confirm('Stergi masina <%= car.marca %> <%= car.model %>?');">
+                        <button type="submit">Sterge</button>
+                    </form>
+                <% } %>
             </td>
         </tr>
     <% }); %>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog - Inchirieri auto</title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1>Catalog masini</h1>
+
+<form method="get" action="/catalog">
+    <label>De la: <input type="date" name="data_start" value="<%= filters.data_start %>"></label>
+    <label>Pana la: <input type="date" name="data_end" value="<%= filters.data_end %>"></label>
+    <label>Categorie:
+        <select name="category_id">
+            <option value="">Toate</option>
+            <% categories.forEach(function (cat) { %>
+                <option value="<%= cat.id %>" <%= String(filters.category_id) === String(cat.id) ? 'selected' : '' %>><%= cat.nume %></option>
+            <% }); %>
+        </select>
+    </label>
+    <button type="submit">Cauta</button>
+    <a href="/catalog">Sterge filtrele</a>
+</form>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } else if (zile) { %>
+    <p>Masini libere pentru <strong><%= zile %></strong> zile, <%= filters.data_start %> - <%= filters.data_end %>:</p>
+<% } %>
+
+<% if (!error && cars.length === 0) { %>
+    <p>Nu exista masini disponibile cu aceste criterii.</p>
+<% } %>
+
+<% if (cars.length > 0) { %>
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>Marca</th><th>Model</th><th>An</th><th>Categorie</th><th>Pret/zi</th>
+            <% if (zile) { %><th>Pret estimat</th><% } %>
+        </tr>
+        <% cars.forEach(function (car) { %>
+            <tr>
+                <td><%= car.marca %></td>
+                <td><%= car.model %></td>
+                <td><%= car.an %></td>
+                <td><%= car.categorie %></td>
+                <td><%= car.pret_pe_zi %> lei</td>
+                <% if (zile) { %><td><%= (car.pret_pe_zi * zile).toFixed(2) %> lei</td><% } %>
+            </tr>
+        <% }); %>
+    </table>
+<% } %>
+</body>
+</html>
