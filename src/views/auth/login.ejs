@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Autentificare - Inchirieri auto</title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1>Autentificare</h1>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<form method="post" action="/login">
+    <p><label>Email: <input type="email" name="email" value="<%= email %>" required></label></p>
+    <p><label>Parola: <input type="password" name="parola" required></label></p>
+    <p><button type="submit">Intra in cont</button></p>
+</form>
+<p>Nu ai cont? <a href="/register">Creeaza un cont</a></p>
+</body>
+</html>

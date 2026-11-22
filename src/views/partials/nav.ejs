@@ -6,5 +6,15 @@
     <a href="/rentals">Rezervari</a> |
     <a href="/payments">Plati</a> |
     <a href="/roles">Roluri</a>
+    <span style="float: right;">
+        <% if (currentUser) { %>
+            <%= currentUser.nume %> (<%= currentUser.rol %>)
+            <form method="post" action="/logout" style="display: inline;">
+        <button type="submit">Iesire</button>
+      </form>
+        <% } else { %>
+            <a href="/login">Autentificare</a> | <a href="/register">Cont nou</a>
+        <% } %>
+    </span>
 </nav>
 <hr>

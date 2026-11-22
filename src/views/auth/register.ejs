@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Cont nou - Inchirieri auto</title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<h1>Creeaza cont</h1>
+
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<form method="post" action="/register">
+    <p><label>Nume: <input name="nume" maxlength="100" value="<%= form.nume || '' %>" required></label></p>
+    <p><label>Email: <input type="email" name="email" maxlength="150" value="<%= form.email || '' %>" required></label></p>
+    <p><label>Telefon: <input name="telefon" maxlength="20" value="<%= form.telefon || '' %>"></label></p>
+    <p><label>Parola: <input type="password" name="parola" minlength="8" required></label></p>
+    <p><label>Confirma parola: <input type="password" name="confirmare" minlength="8" required></label></p>
+    <p><button type="submit">Creeaza cont</button></p>
+</form>
+<p>Ai deja cont? <a href="/login">Autentifica-te</a></p>
+</body>
+</html>
