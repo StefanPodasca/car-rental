@@ -21,6 +21,8 @@ Baza de date este expusa pe portul 5433, pentru a nu intra in conflict cu un Pos
 2. Creeaza fisierul `.env` pornind de la exemplu:
    ```
    copy .env.example .env      (Windows)
+   In fisierul .env, inlocuieste valoarea SESSION_SECRET cu un sir aleator, generat cu:
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
    cp .env.example .env        (Linux / Mac)
    ```
 3. Porneste baza de date:
@@ -62,7 +64,7 @@ Schema completa, cu relatii si constrangeri: [db/init/01_schema.sql](db/init/01_
 | 0 | Tema, document domeniu | Gata |
 | 1 | Modelare, fixtures | Gata |
 | 2 | CRUD, descrierea paginilor | Gata |
-| 3 | Autentificare, roluri | De facut |
+| 3 | Autentificare, roluri | Gata |
 | 4 | Indecsi, load test | De facut |
 | 5 | Rapoarte | De facut |
 | 6 | Sustinere | De facut |
